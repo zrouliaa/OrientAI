@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .card {
+            display: inline-block;
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .card button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-button">
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h2>Card 1</h2>
+            <p>Some description for card 1.</p>
+            <button>Button 1</button>
+        </div>
+        <div class="card">
+            <h2>Card 2</h2>
+            <p>Some description for card 2.</p>
+            <button>Button 2</button>
+        </div>
+        <div class="card">
+            <h2>Card 3</h2>
+            <p>Some description for card 3.</p>
+            <button>Button 3</button>
+        </div>
+    </div>
+</body>
+</html>
