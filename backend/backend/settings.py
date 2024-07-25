@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chat.apps.ChatConfig',
     'authentication.apps.AuthenticationConfig',
+    'orientai_by_marks.apps.OrientaiByMarksConfig',
 ]
 
 MIDDLEWARE = [

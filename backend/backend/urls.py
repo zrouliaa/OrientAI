@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
     path('chat/', include('chat.urls')),
+    path('orientai_by_marks/', include('orientai_by_marks.urls')),
     path('', home_view, name='home'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
