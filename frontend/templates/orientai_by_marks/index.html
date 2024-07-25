@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrientAI by Marks</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/orientai_by_marks.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Enter your marks</h2>
+            <button id="startBtn">START</button>
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span class="close">&times;</span>
+                    <h3>Enter your marks</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="text" name="level" placeholder="Level" required>
+                        <div id="marks-container">
+                            <div class="mark-entry">
+                                <input type="text" name="subjects" placeholder="Subject" required>
+                                <input type="number" name="scores" placeholder="Score" required>
+                            </div>
+                        </div>
+                        <button type="button" id="add-mark">Add another mark</button>
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Here is what AI suggested to you</h2>
+            <p>{{ ai_suggestions }}</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('startBtn').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'block';
+        });
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        document.getElementById('add-mark').addEventListener('click', function() {
+            const container = document.getElementById('marks-container');
+            const newEntry = document.createElement('div');
+            newEntry.classList.add('mark-entry');
+            newEntry.innerHTML = `
+                <input type="text" name="subjects" placeholder="Subject" required>
+                <input type="number" name="scores" placeholder="Score" required>
+            `;
+            container.appendChild(newEntry);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Suggestions</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/orientai_by_marks.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Find Schools or Universities</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Get Suggestions</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Suggestions</h2>
+            <p>{{ suggestions }}</p>
+        </div>
+    </div>
+</body>
+</html>

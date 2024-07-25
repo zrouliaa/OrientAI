@@ -32,7 +32,6 @@ def index(request):
                     {"role": "system", "content": prompt},
                     {"role": "user", "content": "Suggest a career path for me."}
                 ],
-                max_tokens=300
             )
             ai_suggestions = response.choices[0].message.content
 

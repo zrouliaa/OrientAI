@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'authentication.apps.AuthenticationConfig',
     'orientai_by_marks.apps.OrientaiByMarksConfig',
+    'orientai_by_field.apps.OrientaiByFieldConfig',
 ]
 
 MIDDLEWARE = [
