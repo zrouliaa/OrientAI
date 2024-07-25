@@ -11,7 +11,6 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -33,109 +32,119 @@ h1 {
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
 }
 
 #messages {
     padding: 1em;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
     flex: 1;
-    max-height: 75vh; /* Adjust based on header and form height */
+    max-height: 75vh;
+    font-size: 1.5em;
+    /* Adjust based on header and form height */
 }
 
 .message {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
     margin-bottom: 1em;
+    border-radius: 10px;
+    padding: 0.5em;
+    max-width: 80%;
 }
 
 .message img {
     max-width: 150px;
     max-height: 150px;
-    margin-right: 1em;
+    margin-bottom: 1em;
 }
 
 .user-message {
     align-self: flex-end;
     background-color: #e1ffc7;
-    border-radius: 10px;
-    padding: 0.5em;
-    margin-left: auto;
-    max-width: 80%;
+    float: right;
+    /* Align text to the right */
 }
 
 .ai-message {
+    align-self: flex-start;
     background-color: #f1f1f1;
-    border-radius: 10px;
-    padding: 0.5em;
-    margin-right: auto;
-    max-width: 80%;
+    clear: right;
+    /* Align text to the left */
 }
 
+/* List Styling */
+ul,
+ol {
+    margin: 0;
+    padding: 0 0 0 20px;
+    /* Indent the list items */
+    list-style-position: outside;
+    /* Display list markers outside */
+}
+
+li {
+    margin-bottom: 0.5em;
+    /* Space between list items */
+}
+
+/* Form and Textarea Styling */
 form {
     display: flex;
     align-items: center;
     padding: 1em;
     border-top: 1px solid #ddd;
     background-color: #f9f9f9;
-    gap: 0.5em; /* Add spacing between elements */
 }
 
-textarea {
-    flex: 1;
+form .form-group label {
+    display: none;
+}
+
+#chat-textarea {
+    font-size: 1em;
     padding: 0.5em;
-    margin-right: 0.5em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none; /* Prevent resizing */
-    height: 50px; /* Set a fixed height */
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 15px;
+    resize: none;
+    /* Prevent resizing */
+    height: 50px;
+    /* Set a fixed height */
+    overflow: hidden;
+    /* Hide overflow */
+    line-height: 1.5;
+    font-size: 1.5em;
+    width: 80vw;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+}
+
+#chat-textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 button {
-    width: 20%;
-    background-color: #4a90e2;
-    color: #fff;
-    border: none;
-    padding: 0.5em;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    margin-left: 0.5em;
-}
-
-button:hover {
-    background-color: #357abd;
-}
-
-/* File Input Styles */
-.file-upload-wrapper {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.file-upload-button {
-    display: inline-flex;
-    align-items: center;
     background-color: #4a90e2;
     color: #fff;
     border: none;
     padding: 0.5em 1em;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 1em;
-    margin-right: 0.5em;
+    font-size: 2em;
+    margin-left: 0.7em;
+    flex-shrink: 0;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.file-upload-button:hover {
+button:hover {
     background-color: #357abd;
+    transform: translateY(-2px);
 }
 
-.file-upload-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
+button:active {
+    background-color: #2b6b99;
+    transform: translateY(0);
 }

@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+import markdown
+import bleach
+from django.shortcuts import render, redirect
 from .models import Conversation, Message
 from .forms import MessageForm
 import openai
@@ -43,28 +45,25 @@ def chat_view(request):
     else:
         messages = []
 
+    # Convert Markdown to HTML and sanitize
+    for msg in messages:
+        html = markdown.markdown(msg.text)
+        msg.text = bleach.clean(html, tags=['p', 'strong', 'em', 'ul', 'ol', 'li', 'br'], strip=True)
+
     return render(request, 'chat/chat.html', {'form': form, 'messages': messages})
 
-
 def send_message_to_openai(messages, user_message):
-    # Construct the messages list with conversation history
     message_list = []
     for msg in messages:
         role = "user" if not msg.is_ai else "assistant"
         message_list.append({"role": role, "content": msg.text})
     
-    # Add the latest user message to the context
     message_list.append({"role": "user", "content": user_message})
 
-    # Call the OpenAI API
     response = openai.chat.completions.create(
         model="gpt-4o-mini",
         messages=message_list,
-        max_tokens=300
     )
 
-    # Extract and return the AI's response
     ai_message_text = response.choices[0].message.content
     return ai_message_text
-
-
