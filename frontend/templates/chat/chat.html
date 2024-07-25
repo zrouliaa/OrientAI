@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+</head>
+<body>
+    <div id="chat-wrapper">
+        <header>
+            <h1>Chat</h1>
+        </header>
+        <main id="chat-container">
+            <div id="messages">
+                {% for message in messages %}
+                    <div class="message {% if message.is_ai %}ai-message{% else %}user-message{% endif %}">
+                        {% if message.image %}
+                            <img src="{{ message.image.url }}" alt="Image">
+                        {% endif %}
+                        <p>{{ message.text }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Send</button>
+            </form>
+        </main>
+    </div>
+    <script src="{% static 'js/chat.js' %}"></script>
+</body>
+</html>

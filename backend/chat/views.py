@@ -1,3 +1,70 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Conversation, Message
+from .forms import MessageForm
+import openai
+from django.conf import settings
 
-# Create your views here.
+openai.api_key = settings.OPENAI_API_KEY
+
+@login_required
+def chat_view(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST, request.FILES)
+        if form.is_valid():
+            message = form.save(commit=False)
+            conversation_id = request.session.get('conversation_id')
+
+            if not conversation_id:
+                conversation = Conversation(user=request.user)
+                conversation.save()
+                request.session['conversation_id'] = conversation.id
+            else:
+                conversation = Conversation.objects.get(id=conversation_id)
+            
+            message.conversation = conversation
+            message.save()
+
+            # Get the conversation history
+            messages = Message.objects.filter(conversation=conversation)
+
+            # Send message to OpenAI API with context and get the AI response
+            ai_message_text = send_message_to_openai(messages, message.text)
+            ai_message = Message(conversation=conversation, text=ai_message_text, is_ai=True)
+            ai_message.save()
+
+            return redirect('chat:chat_view')
+    else:
+        form = MessageForm()
+
+    conversation_id = request.session.get('conversation_id')
+    if conversation_id:
+        messages = Message.objects.filter(conversation__id=conversation_id)
+    else:
+        messages = []
+
+    return render(request, 'chat/chat.html', {'form': form, 'messages': messages})
+
+
+def send_message_to_openai(messages, user_message):
+    # Construct the messages list with conversation history
+    message_list = []
+    for msg in messages:
+        role = "user" if not msg.is_ai else "assistant"
+        message_list.append({"role": role, "content": msg.text})
+    
+    # Add the latest user message to the context
+    message_list.append({"role": "user", "content": user_message})
+
+    # Call the OpenAI API
+    response = openai.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=message_list,
+        max_tokens=300
+    )
+
+    # Extract and return the AI's response
+    ai_message_text = response.choices[0].message.content
+    return ai_message_text
+
+

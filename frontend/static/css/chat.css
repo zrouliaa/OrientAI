@@ -1,0 +1,141 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+#chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    background-color: #4a90e2;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#messages {
+    padding: 1em;
+    overflow-y: auto; /* Enable vertical scrolling */
+    flex: 1;
+    max-height: 75vh; /* Adjust based on header and form height */
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1em;
+}
+
+.message img {
+    max-width: 150px;
+    max-height: 150px;
+    margin-right: 1em;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #e1ffc7;
+    border-radius: 10px;
+    padding: 0.5em;
+    margin-left: auto;
+    max-width: 80%;
+}
+
+.ai-message {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 0.5em;
+    margin-right: auto;
+    max-width: 80%;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+    gap: 0.5em; /* Add spacing between elements */
+}
+
+textarea {
+    flex: 1;
+    padding: 0.5em;
+    margin-right: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none; /* Prevent resizing */
+    height: 50px; /* Set a fixed height */
+}
+
+button {
+    width: 20%;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-left: 0.5em;
+}
+
+button:hover {
+    background-color: #357abd;
+}
+
+/* File Input Styles */
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.file-upload-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 0.5em;
+}
+
+.file-upload-button:hover {
+    background-color: #357abd;
+}
+
+.file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}

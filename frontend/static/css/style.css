@@ -74,3 +74,28 @@ form button:hover {
 #home-page a:hover {
   background-color: #4682b4;
 }
+
+#chat-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#messages {
+  margin-bottom: 20px;
+}
+
+.message {
+  background-color: #1e90ff;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.message img {
+  max-width: 100%;
+  height: auto;
+}
